@@ -1,0 +1,6 @@
+centernet-pytorch/VOCdevkit/
+centernet-pytorch/2007_train.txt
+centernet-pytorch/2007_val.txt
+/centernet-pytorch/logs/
+/centernet-pytorch/model_data/
+*.pth
