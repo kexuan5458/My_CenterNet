@@ -1,11 +1,120 @@
+'''
+The annotation is saved as a .json file, where each entry of a list contains id, class_name, bboxes. 
+id is the object identification. 
+class_name is a string with the class name. 
+bboxes contains position: (x, y, width, height) where (x, y) is the upper-left pixel locations of the bounding box of the given width and height. 
+And rotation is the angle in degrees using counter-clockwise.
+'''
+
 import json
 import os
 import sys
 import numpy as np
+custom_annotations = '/data/RADIATE/fog_6_0/annotations/annotations.json'
+myDict = {}
 
-folder_root = '/data/RADIATE'
-out_json_path = os.path.join(folder_root, sys.argv[1], 'annotations')
-json_anno_path = os.path.join(folder_root, sys.argv[1], 'annotations')
+array = []  # list
+array_processed = []  # list
+images = []
+categories = []
+ann = []
+
+with open('/data/RADIATE/fog_6_0/Navtech_Cartesian.txt', 'r') as f:
+    for line in f.readlines():
+        array.append(line.replace('\n', ' ').split(' '))
+
+
+for i in range(len(array)):
+    timestamp = '{:.4f}'.format(float(array[i][3])).replace('.', '')
+    array_processed.append([(array[i][1]), timestamp])
+array2D = np.asarray(array_processed)   # <class 'numpy.ndarray'>
+arr_timestamp = array2D[:,1]        # column 1 -> timestamp (str)
+for img_idx in range(len(arr_timestamp)):
+  img_name = arr_timestamp[img_idx] + '.png'
+  images.append(
+      { 
+        "id": img_idx,
+        "file_name": img_name,
+        "height": 1152,
+        "width": 1152
+      })
+# Adding list as dictionary value
+myDict["images"] = images
+
+
+# Define categories
+category = ['car', 'van', 'bus', 'truck', 'motorbike', 'bicycle', 'pedestrian']
+for cat_idx in range(len(category)):
+    categories.append(
+        {
+        "id": cat_idx,
+        "name": category[cat_idx]
+        })
+# Adding list as dictionary value
+myDict["categories"] = categories
+catDic ={
+    "car": 0,
+    "van": 1,
+    "bus": 2,
+    "truck": 3,
+    "motorbike": 4,
+    "bicycle": 5,
+    "pedestrian": 6}
+
+
+# Open and read the JSON file
+with open(custom_annotations, 'r') as file:
+    data = json.load(file)   # data is a list
+# print((data[0])) # data[0] is a dictionary
+
+for data_idx in range(len(data)):
+
+    # Object
+    # Here, object means sth like a car, a van, ...pedestrian.
+    objID = data[data_idx]["id"]
+    objClsName = data[data_idx]["class_name"]
+    objBbox = data[data_idx]["bboxes"]
+    print(objID)    # 1   int
+    print(objClsName)   # bus  str
+    # print(type(objBbox))    # list
+
+    '''
+    for key in data[0].keys():
+        print(key)
+    id
+    class_name
+    bboxes
+    '''
+    idx = 0 # image ID of one object. 
+    for item in objBbox:
+        # 檢查是否存在 'position' key
+        if 'position' in item:
+        # # 檢查是否存在 'rotation' key
+        # if 'rotation' in item:
+            position = item['position']     # position is a list [x, y, width, height]
+            # print(f"Position: {position}")# (x, y) is the upper-left pixel 
+            rotation = item['rotation']     # rotation is a float
+            # print(f"Rotation: {rotation}")
+            img_name = arr_timestamp[idx] + '.png'
+            # print(f"Image name: {img_name}")
+        
+        ann.append(
+        { 
+            "id": data_idx, # object id
+            "image_id": idx,
+            "category_id": catDic[objClsName],
+            "bbox": position, 
+            "angle": rotation,
+            "area": (position[2] * position[3])
+        })
+
+        # 輸出空行，以分隔不同的字典元素
+        print()
+        idx += 1
+
+myDict["annotations"] = ann
+
+'''
 # Initialize the COCO JSON skeleton
 coco_data = {
     "images": [],
@@ -14,15 +123,16 @@ coco_data = {
 }
 
 # Process your custom annotations
-for image_data in (os.path.join(json_anno_path, 'annotations.json')):
+for image_data in custom_annotations:
     image_info = {
         "id": image_data["id"],
         "file_name": "path/to/your/image.jpg",  # Replace with the actual image path
-        "width": 1152,  # Replace with actual image width (1152 pixel?)
-        "height": 1152,  # Replace with actual image height (1152 pixel?)
+        "width": 640,  # Replace with actual image width
+        "height": 480,  # Replace with actual image height
         "annotations": [annotation_id for annotation_id in image_data["bboxes"]]
     }
     coco_data["images"].append(image_info)
+
     for bbox_data in image_data["bboxes"]:
         annotation = {
             "id": bbox_data["id"],
@@ -33,103 +143,19 @@ for image_data in (os.path.join(json_anno_path, 'annotations.json')):
             "iscrowd": 0  # 0 for non-crowd objects
         }
         coco_data["annotations"].append(annotation)
+
 # Define categories
-categories = [  # Replace with the actual class name
-		{'id': 1, 'name': 'car'},
-    {'id': 2, 'name': 'van'},
-		{'id': 3, 'name': 'bus'},
-		{'id': 4, 'name': 'truck'},
-    {'id': 5, 'name': 'motorbike'},
-		{'id': 6, 'name': 'bicycle'},
-    {'id': 7, 'name': 'pedestrian'}
-]  # 8 categories of road actors (a group of pedestrians ?)
-coco_data["category"].append(categories)
+category = {
+    "id": 1,
+    "name": "van"  # Replace with the actual class name
+}
+
 
 # Save the COCO JSON to a file
 with open("coco_annotations.json", "w") as f:
     json.dump(coco_data, f)
 
-
-
-
-
-###############################################################
-###############################################################
-###############################################################
-img_idx = 1
-anno_idx = 1
-
-annotations = []
-images = []
-
-for i, f in enumerate(list(map(lambda x: int(x[:-4]), s))):
-  try:
-    with open(os.path.join(json_anno_path, '{}.json'.format(f))) as fl:
-      data = json.load(fl)
-  except:
-    continue
-
-  
-  images.append(
-    {
-      "file_name": "{}/{}.png".format(split_str[si], f),
-      "id": img_idx
-    })
-
-  
-  # print(data['shapes'])
-  single_img_anno = [x['points'] for x in data['shapes']]
-  # print(single_img_anno)
-
-  single_img_cls = [x['label'] for x in data['shapes']]
-  # print(single_img_cls)
-
-  # if f == 16377251434601:
-  # 	print(len(data['shapes']))
-  # 	print(len(single_img_cls))
-  # 	print(len(single_img_anno))
-  # 	print(img_idx)
-
-  for anno, cls in zip(single_img_anno, single_img_cls):
-    x_lt = anno[0]
-    y_lt = anno[1]
-    w = anno[2]
-    h = anno[3]
-    ang = anno[4]
-
-
-    annotations.append(
-      {
-        "id": anno_idx,
-        "category_id": cat_cvt[cls] + 1,
-        "image_id": img_idx,
-        "bbox": [
-          x_lt-1,
-          y_lt-1,
-          w+2,
-          h+2,
-          ang
-        ],
-        "conf": 1,
-        "iscrowd": 0,
-        "area": (w+2) * (h+2)
-      })
-    anno_idx += 1
-
-  # if f == 16377251434601:
-  # 	print(list(filter(lambda x: x['image_id'] == 8, annotations)))
-  # 	print(len(list(filter(lambda x: x['image_id'] == 8, annotations))))
-
-  img_idx += 1
-
-out = dict(
-  images=images,
-  annotations=annotations,
-  categories=categories
-)
-
-with open('coco.json', "w") as f:
-	json.dump(out, f, indent = 2)
-###############################################################
-###############################################################
-###############################################################
+'''
+# Save the COCO JSON to a file
+with open("coco_annotations.json", "w") as outfile:
+    json.dump(myDict, outfile)
