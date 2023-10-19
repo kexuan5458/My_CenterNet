@@ -24,24 +24,6 @@ with open('/data/RADIATE/fog_6_0/Navtech_Cartesian.txt', 'r') as f:
         array.append(line.replace('\n', ' ').split(' '))
 
 
-for i in range(len(array)):
-    timestamp = '{:.4f}'.format(float(array[i][3])).replace('.', '')
-    array_processed.append([(array[i][1]), timestamp])
-array2D = np.asarray(array_processed)  # <class 'numpy.ndarray'>
-arr_timestamp = array2D[:,1] # column 1 -> timestamp (str)
-for img_idx in range(len(arr_timestamp)):
-  img_name = arr_timestamp[img_idx] + '.png'
-  images.append(
-      { 
-        "id": img_idx,
-        "file_name": img_name,
-        "height": 1152,
-        "width": 1152
-      })
-# Adding list as dictionary value
-myDict["images"] = images
-
-
 # Define categories
 category = ['car', 'van', 'bus', 'truck', 'motorbike', 'bicycle', 'pedestrian']
 for cat_idx in range(len(category)):
@@ -62,13 +44,29 @@ catDic ={
     "pedestrian": 6}
 
 
+for i in range(len(array)):
+    timestamp = '{:.4f}'.format(float(array[i][3])).replace('.', '')
+    array_processed.append([(array[i][1]), timestamp])
+array2D = np.asarray(array_processed)  # <class 'numpy.ndarray'>
+arr_timestamp = array2D[:,1] # column 1 -> timestamp (str)
+for img_idx in range(len(arr_timestamp)):
+  img_name = arr_timestamp[img_idx] + '.png'
+  images.append(
+      { 
+        "id": img_idx,
+        "file_name": img_name,
+        "height": 1152,
+        "width": 1152
+      })
+# Adding list as dictionary value
+myDict["images"] = images
+
+
 # Open and read the JSON file
 with open(custom_annotations, 'r') as file:
     data = json.load(file)   # data is a list
 # print((data[0])) # data[0] is a dictionary
-
 for data_idx in range(len(data)):
-
     # Object
     # Here, object means sth like a car, a van, ...pedestrian.
     objID = data[data_idx]["id"]
@@ -97,7 +95,7 @@ for data_idx in range(len(data)):
             # print(f"Rotation: {rotation}")
             img_name = arr_timestamp[idx] + '.png'
             # print(f"Image name: {img_name}")
-        
+            crowd0_1 = 1 if (objClsName == "group of pedestrian") else 0
             ann.append(
             { 
                 "id": data_idx, # object id
@@ -105,57 +103,13 @@ for data_idx in range(len(data)):
                 "category_id": catDic[objClsName],
                 "bbox": position, 
                 "angle": rotation,
-                "area": (position[2] * position[3])
+                "area": (position[2] * position[3]),
+                "iscrowd": 0  # 0 for non-crowd objects
             })
-
-        # 輸出空行，以分隔不同的字典元素
-        print()
+        # 輸出空行，以分隔不同的字典元素  print()
         idx += 1
-
 myDict["annotations"] = ann
 
-'''
-# Initialize the COCO JSON skeleton
-coco_data = {
-    "images": [],
-    "annotations": [],
-    "categories": []
-}
-
-# Process your custom annotations
-for image_data in custom_annotations:
-    image_info = {
-        "id": image_data["id"],
-        "file_name": "path/to/your/image.jpg",  # Replace with the actual image path
-        "width": 640,  # Replace with actual image width
-        "height": 480,  # Replace with actual image height
-        "annotations": [annotation_id for annotation_id in image_data["bboxes"]]
-    }
-    coco_data["images"].append(image_info)
-
-    for bbox_data in image_data["bboxes"]:
-        annotation = {
-            "id": bbox_data["id"],
-            "image_id": image_data["id"],
-            "category_id": 1,  # Replace with the appropriate category ID
-            "bbox": bbox_data["position"],
-            "area": bbox_data["position"][2] * bbox_data["position"][3],
-            "iscrowd": 0  # 0 for non-crowd objects
-        }
-        coco_data["annotations"].append(annotation)
-
-# Define categories
-category = {
-    "id": 1,
-    "name": "van"  # Replace with the actual class name
-}
-
-
-# Save the COCO JSON to a file
-with open("coco_annotations.json", "w") as f:
-    json.dump(coco_data, f)
-
-'''
 # Save the COCO JSON to a file
 with open("coco_annotations.json", "w") as outfile:
     json.dump(myDict, outfile)
