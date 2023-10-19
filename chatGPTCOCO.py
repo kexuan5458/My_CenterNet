@@ -17,6 +17,7 @@ array = []  # list
 array_processed = []  # list
 images = []
 categories = []
+ann = []
 
 with open('/data/RADIATE/fog_6_0/Navtech_Cartesian.txt', 'r') as f:
     for line in f.readlines():
@@ -27,7 +28,6 @@ for i in range(len(array)):
     timestamp = '{:.4f}'.format(float(array[i][3])).replace('.', '')
     array_processed.append([(array[i][1]), timestamp])
 array2D = np.asarray(array_processed)  # <class 'numpy.ndarray'>
-# print(array2D)
 arr_timestamp = array2D[:,1] # column 1 -> timestamp (str)
 for img_idx in range(len(arr_timestamp)):
   img_name = arr_timestamp[img_idx] + '.png'
@@ -52,6 +52,14 @@ for cat_idx in range(len(category)):
         })
 # Adding list as dictionary value
 myDict["categories"] = categories
+catDic ={
+    "car": 0,
+    "van": 1,
+    "bus": 2,
+    "truck": 3,
+    "motorbike": 4,
+    "bicycle": 5,
+    "pedestrian": 6}
 
 
 # Open and read the JSON file
@@ -81,21 +89,30 @@ for data_idx in range(len(data)):
     for item in objBbox:
         # 檢查是否存在 'position' key
         if 'position' in item:
+        # # 檢查是否存在 'rotation' key
+        # if 'rotation' in item:
             position = item['position']     # position is a list [x, y, width, height]
-            # (x, y) is the upper-left pixel
-            print(f"Position: {position}")
-
-        # 檢查是否存在 'rotation' key
-        if 'rotation' in item:
+            # print(f"Position: {position}") # (x, y) is the upper-left pixel
             rotation = item['rotation']    # rotation is a float
             # print(f"Rotation: {rotation}")
             img_name = arr_timestamp[idx] + '.png'
             # print(f"Image name: {img_name}")
         
-        # fog_6_0 共有714個frame idx = 0-713
+            ann.append(
+            { 
+                "id": data_idx, # object id
+                "image_id": idx,
+                "category_id": catDic[objClsName],
+                "bbox": position, 
+                "angle": rotation,
+                "area": (position[2] * position[3])
+            })
+
         # 輸出空行，以分隔不同的字典元素
         print()
         idx += 1
+
+myDict["annotations"] = ann
 
 '''
 # Initialize the COCO JSON skeleton
