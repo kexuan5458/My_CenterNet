@@ -57,7 +57,7 @@ radar_calib:
     range_cells: 576
     azimuth_cells: 400
 
-calib_file: 'config/default-calib.yaml'
+calib_file: '/home/ee904/Repo/My_CenterNet/radiate_sdk/config/default-calib.yaml'
 
 
     

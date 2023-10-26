@@ -21,7 +21,7 @@ class Sequence:
     | >>> seq.vis_all(output)
     """
 
-    def __init__(self, sequence_path, config_file='config/config.yaml'):
+    def __init__(self, sequence_path, config_file='/home/ee904/Repo/My_CenterNet/radiate_sdk/config/config.yaml'):
         """
         Initialise the class Sequence. This class contains the methods related to
         access the sensor and annotation information at certain timestamp
