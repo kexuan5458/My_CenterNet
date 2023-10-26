@@ -119,6 +119,6 @@ for data_idx in range(len(data)):
 myDict["annotations"] = ann
 
 # Save the COCO JSON to a file
-outputfile = os.path.join(folder_root, sys.argv[1], 'coco_annotations.json')
+outputfile = os.path.join(folder_root, sys.argv[1], (sys.argv[1]+'coco_annotations.json'))
 with open(outputfile, "w") as outfile:
     json.dump(myDict, outfile)
