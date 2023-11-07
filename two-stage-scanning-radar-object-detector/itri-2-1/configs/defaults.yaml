@@ -1,0 +1,121 @@
+experiment: default # experiment name
+
+# path to pretrained weights
+# optimizer states are not restored
+# pretrained: /mnt/data/Projects/centernet-uda/weights/coco_dla_2x.pth
+
+# path to last trained model
+# will restore optimizer states
+# if pretraned path is given, resume path is used
+resume:
+
+model:
+  backend:
+    name: dla
+    params:
+      num_classes: 3
+      num_keypoints: 0
+      rotated_boxes: True
+    loss:
+      name: centernet.DetectionLoss
+      params:
+        hm_weight: 1.0
+        off_weight: 1.0
+        wh_weight: 0.1
+        angle_weight: 1.0
+        periodic: False
+  uda:
+
+datasets:
+  training:
+    name: coco
+    params:
+      image_folder: /mnt/datasets_ssd/theodore_plus/images/
+      annotation_file: /mnt/datasets_ssd/theodore_plus/coco/annotations/instances.json
+      target_domain_glob:
+        # - /mnt/datasets_ssd/DST/2020-02-14-14h30m47s/*.png
+        # - /mnt/datasets_ssd/CEPDOF+HABBOF+MR-R/images/*.jpg
+      augmentation:
+        - Sometimes:
+            p: 0.8
+            then_list:
+              # - AddToHue:
+              #     value: [-128, 128]
+              # - AddToBrightness:
+              #     add: [-100, 100]
+              # - MotionBlur:
+              #     k: [3, 10]
+              #     angle: [-90, 90]
+              # - AdditiveGaussianNoise:
+              #     scale: [0, 8]
+              - Crop:
+                  percent: [0.0, 0.3]
+              - Affine:
+                  translate_percent: [-0.2, 0.2]
+                  scale: [0.8, 1.3]
+                  # rotate: [-45, 45]
+        - Fliplr:
+            p: 0.5
+        - Flipud:
+            p: 0.5
+
+  validation:
+    name: coco
+    params:
+      image_folder: /mnt/data/datasets/omnidetector-Flat/JPEGImages/
+      annotation_file: /mnt/data/datasets/omnidetector-Flat/coco/annotations/instances_training.json
+      input_size: [800, 800]
+      target_domain_glob:
+        # - /mnt/datasets_ssd/DST/2020-02-14-14h30m47s/*.png
+        # - /mnt/datasets_ssd/CEPDOF+HABBOF+MR-R/images/*.jpg
+
+  # test:
+  #   name: coco
+  #   params:
+  #     image_folder: /mnt/data/datasets/omnidetector-Flat/JPEGImages/
+  #     annotation_file: /mnt/data/datasets/omnidetector-Flat/coco/annotations/instances_training.json
+  #     input_size: [800, 800]
+  #     target_domain_glob:
+        # - /mnt/datasets_ssd/DST/2020-02-14-14h30m47s/*.png
+        # - /mnt/datasets_ssd/CEPDOF+HABBOF+MR-R/images/*.jpg
+
+normalize:
+  mean: [0.40789654, 0.44719302, 0.47026115]
+  std: [0.28863828, 0.27408164, 0.27809835]
+
+optimizer:
+  name: Adam
+  params:
+    lr: 0.00005
+  scheduler:
+
+evaluation:
+  coco:
+    per_class: True
+
+tensorboard:
+  num_visualizations: 2000
+  score_threshold: 0.2
+  font_size: 14
+  alpha: 0.7
+
+max_detections: 128
+score_threshold: 0.0
+epochs: 70
+batch_size: 16
+num_workers: 32
+
+seed: 42
+gpu: 0
+test_only: False
+eval_at_n_epoch: 1
+
+# can be training/total_loss, validation/total_loss or MSCOCO_Precision/mAP
+save_best_metric:
+  name: validation/total_loss
+  mode: min
+
+hydra:
+  run:
+    # dir: ./outputs/${experiment}/${now:%Y-%m-%d-%H-%M-%S}
+    dir: ./outputs/${experiment}/

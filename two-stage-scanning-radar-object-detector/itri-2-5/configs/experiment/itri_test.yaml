@@ -1,0 +1,70 @@
+experiment: itri_test
+pretrained: /home/950154_customer/sungting/handover/thesis_repo_weight/itri-2-5/model_best.pth
+
+# resume: 
+
+model:
+  uda:
+    # AdversarialEntropyMinimization:
+    #   adversarial_weight: 0.0001
+    #   optimizer:
+    #     name: Adam
+    #     params:
+    #       lr: 0.001
+    #       weight_decay: 0.0001
+
+datasets:
+  training:
+    params:
+      image_folder: /home/950154_customer/sungting/data/itri/201007
+      annotation_file: /home/950154_customer/sungting/data/itri/201007/merged_anno_angle_three_class/val.json
+      input_size: [1152, 1152]
+
+  validation:
+    params:
+      image_folder: /home/950154_customer/sungting/data/itri/201007
+      annotation_file: /home/950154_customer/sungting/data/itri/201007/merged_anno_angle_three_class/test.json
+      input_size: [1152, 1152]
+
+  test:
+    name: coco
+    params:
+      image_folder: /home/950154_customer/sungting/data/itri/201007
+      annotation_file: /home/950154_customer/sungting/data/itri/201007/merged_anno_angle_three_class/test.json
+      input_size: [1152, 1152]
+
+optimizer:
+  name: Adam
+  params:
+    # lr: 0.00005
+    lr: 0.000125
+    weight_decay: 0.0001
+    # momentum: 0.9
+  scheduler:
+    name: CosineAnnealingLR
+    params:
+      T_max: 50
+      eta_min: 0.000001
+      #verbose: True
+
+batch_size: 2 #28
+epochs: 70
+test_only: True
+save_npz: False
+is_vis_output: False
+is_save_pickle: False
+
+# gpu:
+#   - 0
+#   - 1
+# save_best_metric:
+#   name: MSCOCO_Precision/mAP.50IOU
+#   mode: max
+
+is_two_stage: True
+
+hydra:
+  run:
+    # dir:
+    # dir: ./outputs/${experiment}/
+    dir: ./outputs/${experiment}/${now:%Y-%m-%d-%H-%M-%S}-test

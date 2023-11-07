@@ -1,0 +1,117 @@
+experiment: hw2itri_em_dla
+# pretrained: /mnt/data/Projects/centernet-uda/outputs/entropy_minimization_dla/model_best.pth
+# pretrained: /home/950154_customer/sungting/da_centernet_uda/centernet-uda/outputs/hw2itri_em_dla/2021-08-26-18-37-53/model_best.pth
+# pretrained: /home/950154_customer/sungting/da_centernet_uda/centernet-uda-vanilla-polar/outputs/hw2itri_em_dla_polar/2022-04-11-10-58-33/model_best.pth
+# pretrained: /home/950154_customer/sungting/code/centernet-uda-vanilla-polar/outputs/hw2itri_em_dla_polar/2022-04-13-22-24-17/model_best.pth
+# pretrained: /home/950154_customer/sungting/code/centernet-uda-vanilla-polar/outputs/hw2itri_em_dla_polar/2022-04-15-17-30-58/model_last.pth # ratio:2
+# pretrained: /home/950154_customer/sungting/code/centernet-uda-vanilla-polar/outputs/hw2itri_em_dla_polar/2022-04-14-16-01-44/model_last.pth # ratio:4
+# pretrained: /home/950154_customer/sungting/code/centernet-uda/outputs/hw2itri_em_dla/2022-04-27-14-34-51/model_best.pth
+# pretrained: /home/950154_customer/sungting/code/centernet-uda/outputs/hw2itri_em_dla/2022-05-01-15-14-46/model_best.pth
+pretrained: /home/950154_customer/sungting/code/centernet-uda-single-class-singlechannel-input/outputs/single-input/model_best.pth # only image intensity
+
+# resume: /home/950154_customer/sungting/da_centernet_uda/centernet-uda/outputs/hw2itri_em_dla/2021-08-26-18-37-53/model_best.pth
+
+model:
+  uda:
+    # AdversarialEntropyMinimization:
+    #   adversarial_weight: 0.0001
+    #   optimizer:
+    #     name: Adam
+    #     params:
+    #       lr: 0.001
+    #       weight_decay: 0.0001
+
+datasets:
+  training:
+    params:
+      # image_folder: /home/950154_customer/sungting/data/Heriot-Watt
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/train_half.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/small_1/train_half_small.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/motorbike/train_half_motorbike.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/small_1/train_half_small_polar.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/small_1/train_small_many_obj.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/train_half_polar.json
+
+      image_folder: /home/950154_customer/sungting/data/Heriot-Watt-new
+      annotation_file: /home/950154_customer/sungting/data/Heriot-Watt-new/annotations/single_class/train_cart.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt-new/annotations/mul_class/train_cart.json
+      input_size: [1152, 1152]
+      # augment_target_domain: True
+      # input_size: [400, 576] # w, h
+      # cart_size: [1152, 1152]
+  validation:
+    params:
+      # image_folder: /home/950154_customer/sungting/data/Heriot-Watt
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/val_half.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/small_1/val_half_small.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/motorbike/val_half_motorbike.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/small_1/val_half_small_polar.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/small_1/val_small_many_obj.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/val_half_polar.json
+
+      image_folder: /home/950154_customer/sungting/data/Heriot-Watt-new
+      annotation_file: /home/950154_customer/sungting/data/Heriot-Watt-new/annotations/single_class/val_cart.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt-new/annotations/mul_class/val_cart.json
+      input_size: [1152, 1152]
+      # input_size: [400, 576]
+      # cart_size: [1152, 1152]
+  test:
+    name: coco
+    params:
+      image_folder: /home/950154_customer/sungting/data/Heriot-Watt-new
+      annotation_file: /home/950154_customer/sungting/data/Heriot-Watt-new/annotations/single_class/test_cart.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt-new/annotations/mul_class/test_cart.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt-new/annotations/single_class/test_small_many_obj_cart.json
+      input_size: [1152, 1152]
+
+      # image_folder: /home/950154_customer/sungting/data/Heriot-Watt
+  #     image_folder: /home/950154_customer/sungting/dataset/itri_no_label/all_seq
+  #     # annotation_file: /home/950154_customer/sungting/Heriot-Watt/annotations/val_half.json
+  #     # annotation_file: /home/950154_customer/sungting/Heriot-Watt/annotations/small_1/val_half_small.json
+  #     annotation_file: /home/950154_customer/sungting/dataset/itri_no_label/all_seq/annotation.json
+      # annotation_file: /home/950154_customer/sungting/data/Heriot-Watt/annotations/small_1/val_small_many_obj.json
+      # input_size: [1152, 1152]
+  #     target_domain_glob:
+  #       - /home/950154_customer/sungting/dataset/itri_no_label/all_seq/2105051824/sub/itri_cart_2_2/*.png
+
+optimizer:
+  name: Adam
+  params:
+    # lr: 0.00005
+    lr: 0.000125
+    weight_decay: 0.0001
+    # momentum: 0.9
+  scheduler:
+    name: CosineAnnealingLR
+    params:
+      T_max: 50
+      eta_min: 0.000001
+      #verbose: True
+# batch_size: 24 #28
+# vis_output_path: './viz_output'
+# is_save_pickle: False
+
+# gpu:
+#   - 0
+#   - 1
+
+# save_best_metric:
+#   name: MSCOCO_Precision/mAP.50IOU
+#   mode: max
+
+# important config
+test_only: False
+save_npz: False
+is_vis_output: False
+batch_size: 16 #28
+epochs: 70
+num_workers: 64
+
+
+hydra:
+  run:
+    # dir:
+#     dir: ./outputs/${experiment}/
+    # dir: ./outputs/${experiment}/${now:%Y-%m-%d-%H-%M-%S}
+    # dir: ./outputs/${experiment}/${now:%Y-%m-%d-%H-%M-%S}_featuremap
+    # dir: ./outputs/${experiment}/${now:%Y-%m-%d-%H-%M-%S}_featuremap_fix_min_max
