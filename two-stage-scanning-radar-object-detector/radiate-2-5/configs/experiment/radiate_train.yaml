@@ -1,0 +1,73 @@
+experiment: radiate_train
+pretrained: /home/950154_customer/sungting/handover/thesis_repo_weight/radiate-2-5/model_best.pth
+
+# resume: 
+
+model:
+  uda:
+    # AdversarialEntropyMinimization:
+    #   adversarial_weight: 0.0001
+    #   optimizer:
+    #     name: Adam
+    #     params:
+    #       lr: 0.001
+    #       weight_decay: 0.0001
+
+datasets:
+  training:
+    params:
+      # image_folder: /home/950154_customer/sungting/Heriot-Watt-new
+      # annotation_file: /home/950154_customer/sungting/Heriot-Watt-new/annotations/single_class/train_cart.json
+      image_folder: /data/RADIATE/train_good_and_bad_weather
+      annotation_file: /data/RADIATE/train_good_and_bad_weather/train_good_and_bad_weather.json
+      input_size: [1152, 1152]
+
+  # validation:
+  #   params:
+  #     image_folder: /home/950154_customer/sungting/Heriot-Watt-new
+  #     annotation_file: /home/950154_customer/sungting/Heriot-Watt-new/annotations/single_class/val_cart.json
+  #     input_size: [1152, 1152]
+
+  test:
+    name: coco
+    params:
+      image_folder: /data/RADIATE/test
+      annotation_file: /data/RADIATE/test/test.json
+      input_size: [1152, 1152]
+
+optimizer:
+  name: Adam
+  params:
+    # lr: 0.00005
+    lr: 0.000125
+    weight_decay: 0.0001
+    # momentum: 0.9
+  scheduler:
+    name: CosineAnnealingLR
+    params:
+      T_max: 50
+      eta_min: 0.000001
+      #verbose: True
+
+batch_size: 16 #28
+epochs: 70
+test_only: False
+save_npz: False
+is_vis_output: False
+is_save_pickle: False
+# gpu:
+#   - 0
+#   - 1
+# save_best_metric:
+#   name: MSCOCO_Precision/mAP.50IOU
+#   mode: max
+
+is_two_stage: True
+
+hydra:
+  run:
+    dir: ./outputs/${experiment}/${now:%Y-%m-%d-%H-%M-%S}
+    # dir:
+    # dir: ./outputs/${experiment}/
+    # dir: ./outputs/${experiment}/${now:%Y-%m-%d-%H-%M-%S}_save_featuremap
+    # dir: ./outputs/${experiment}/${now:%Y-%m-%d-%H-%M-%S}_featuremap_fix_min_max
