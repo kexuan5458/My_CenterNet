@@ -1,0 +1,158 @@
+(base) ee904@4090-2:~$ cd /data/Radiate/ALLannotations/
+(base) ee904@4090-2:/data/Radiate/ALLannotations$ chmod u+x merge.sh
+(base) ee904@4090-2:/data/Radiate/ALLannotations$ ./merge.sh 
+(base) ee904@4090-2:/data/Radiate/ALLannotations$ ./merge.sh 
+ 81%|█████████████████████████████▏      | 1161/1435 [00:00<00:00, 10058.72it/s]
+ 81%|█████████████████████████████▉       | 1161/1435 [00:00<00:00, 4950.47it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/junction_1_13coco_annotations.json , /data/Radiate/ALLannotations/motorway_1_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+(base) ee904@4090-2:/data/Radiate/ALLannotations$ chmod u+x merge.sh
+(base) ee904@4090-2:/data/Radiate/ALLannotations$ ./merge.sh 
+ 75%|███████████████████████████▊         | 1622/2158 [00:00<00:00, 5777.90it/s]
+ 75%|███████████████████████████▊         | 1622/2158 [00:00<00:00, 3350.96it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_2coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 71%|██████████████████████████▏          | 2033/2872 [00:00<00:00, 4474.16it/s]
+ 71%|██████████████████████████▏          | 2033/2872 [00:00<00:00, 2888.45it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 76%|████████████████████████████▎        | 2737/3579 [00:00<00:00, 3396.78it/s]
+ 76%|████████████████████████████▎        | 2737/3579 [00:01<00:00, 1845.99it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/city_2_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 82%|██████████████████████████████▏      | 3824/4680 [00:01<00:00, 2208.44it/s]
+ 82%|██████████████████████████████▏      | 3824/4680 [00:03<00:00, 1152.75it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/city_4_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 77%|████████████████████████████▍        | 4147/5399 [00:03<00:01, 1232.53it/s]
+ 77%|████████████████████████████▍        | 4147/5399 [00:03<00:01, 1092.57it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_7coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 72%|██████████████████████████▊          | 4430/6121 [00:04<00:01, 1068.97it/s]
+ 72%|███████████████████████████▌          | 4430/6121 [00:04<00:01, 990.47it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_6coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 73%|██████████████████████████▉          | 4975/6841 [00:04<00:01, 1025.81it/s]
+ 73%|███████████████████████████▋          | 4975/6841 [00:05<00:02, 892.99it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_2_3coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 75%|████████████████████████████▌         | 5696/7562 [00:05<00:01, 982.03it/s]
+ 75%|████████████████████████████▌         | 5696/7562 [00:08<00:02, 652.08it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/city_1_1coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 76%|████████████████████████████▊         | 6287/8281 [00:09<00:02, 677.94it/s]
+ 76%|████████████████████████████▊         | 6287/8281 [00:10<00:03, 610.03it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_2_1coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 78%|█████████████████████████████▌        | 7011/9005 [00:10<00:02, 672.83it/s]
+ 78%|█████████████████████████████▌        | 7011/9005 [00:15<00:04, 451.09it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/city_3_2coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 79%|█████████████████████████████▊        | 7633/9723 [00:15<00:04, 486.67it/s]
+ 79%|█████████████████████████████▊        | 7633/9723 [00:18<00:05, 413.88it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_3_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 80%|█████████████████████████████▌       | 8348/10438 [00:18<00:04, 452.64it/s]
+ 80%|█████████████████████████████▌       | 8348/10438 [00:22<00:05, 374.98it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/motorway_2_1coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 81%|██████████████████████████████       | 9064/11154 [00:22<00:05, 403.98it/s]
+ 81%|██████████████████████████████       | 9064/11154 [00:29<00:06, 305.47it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/city_3_1coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 82%|██████████████████████████████▏      | 9701/11879 [00:29<00:06, 326.58it/s]
+ 82%|██████████████████████████████▏      | 9701/11879 [00:32<00:07, 298.44it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_3_1coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 83%|█████████████████████████████▊      | 10414/12592 [00:33<00:06, 312.92it/s]
+ 83%|█████████████████████████████▊      | 10414/12592 [00:40<00:08, 258.57it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/city_3_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 81%|█████████████████████████████▎      | 10820/13306 [00:41<00:09, 258.79it/s]
+ 81%|█████████████████████████████▎      | 10820/13306 [00:44<00:10, 241.72it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/city_1_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 82%|█████████████████████████████▌      | 11512/14026 [00:44<00:09, 256.46it/s]
+ 82%|█████████████████████████████▌      | 11512/14026 [00:48<00:10, 235.14it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/rural_1_1coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 83%|█████████████████████████████▊      | 12232/14746 [00:49<00:10, 247.54it/s]
+ 83%|█████████████████████████████▊      | 12232/14746 [01:05<00:13, 187.52it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/city_3_3coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 82%|█████████████████████████████▋      | 12748/15466 [01:06<00:14, 193.00it/s]
+ 82%|█████████████████████████████▋      | 12748/15466 [01:10<00:15, 179.82it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_2_2coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 83%|█████████████████████████████▉      | 13311/16029 [01:11<00:14, 185.13it/s]
+ 83%|█████████████████████████████▉      | 13311/16029 [01:18<00:16, 169.11it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/city_5_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 82%|█████████████████████████████▍      | 13689/16744 [01:19<00:17, 172.47it/s]
+ 82%|█████████████████████████████▍      | 13689/16744 [01:23<00:18, 163.67it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/motorway_2_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 81%|████████████████████████████▉       | 14063/17467 [01:25<00:20, 165.02it/s]
+ 81%|████████████████████████████▉       | 14063/17467 [01:29<00:21, 157.67it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_3coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 81%|█████████████████████████████       | 14706/18189 [01:28<00:20, 166.82it/s]
+ 81%|█████████████████████████████       | 14706/18189 [01:34<00:22, 155.27it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/rural_1_3coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 80%|████████████████████████████▋       | 15061/18911 [01:34<00:24, 159.56it/s]
+ 80%|████████████████████████████▋       | 15061/18911 [01:37<00:24, 154.59it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_4coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 79%|████████████████████████████▎       | 15423/19632 [01:38<00:26, 156.28it/s]
+ 79%|████████████████████████████▎       | 15423/19632 [01:42<00:27, 150.83it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_1coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 77%|███████████████████████████▉        | 15761/20355 [01:42<00:29, 153.42it/s]
+ 77%|███████████████████████████▉        | 15761/20355 [01:46<00:31, 147.37it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_14coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 77%|███████████████████████████▋        | 16178/21077 [01:46<00:32, 151.98it/s]
+ 77%|███████████████████████████▋        | 16178/21077 [01:51<00:33, 145.31it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_5coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 77%|███████████████████████████▌        | 16588/21660 [01:50<00:33, 149.91it/s]
+ 77%|███████████████████████████▌        | 16588/21660 [01:56<00:35, 142.44it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_1_15coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+ 77%|███████████████████████████▋        | 17218/22371 [01:55<00:34, 148.98it/s]
+ 77%|███████████████████████████▋        | 17218/22371 [02:01<00:36, 141.76it/s]
+
+
+Successfully merged the two files (/data/Radiate/ALLannotations/OUTPUT_JSON.json , /data/Radiate/ALLannotations/junction_2_0coco_annotations.json) into /data/Radiate/ALLannotations/OUTPUT_JSON.json
+(base) ee904@4090-2:/data/Radiate/ALLannotations$ 
+
