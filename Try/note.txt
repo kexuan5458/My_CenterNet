@@ -1,2 +1,141 @@
 conda create -n sungting-work python=3.8
 pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118
+
+# clone this repo to install dependancy
+git clone https://github.com/scheckmedia/centernet-uda.git
+cd centernet-uda
+pip install numpy
+pip install dotsi
+pip install tensorboard
+pip install -r requirements.txt
+
+///
+python setup.py bdist_wheel did not run successfully.
+///
+pip install --upgrade setuptools
+pip install nes-py --no-cache-dir
+pip install --upgrade pip setuptools wheel
+
+
+///
+fatal error: TH/TH.h: No such file or directory
+///
+git clone https://github.com/torch/torch7
+mkdir th_build
+cd th_build
+# configure TH build
+cmake ../torch7/lib/TH
+# compile library
+make
+# install shared library and header files
+sudo make install
+
+wget https://github.com/prasmussen/gdrive/releases/download/2.1.1/gdrive_2.1.1_linux_amd64.tar.gz
+tar zxvf gdrive_2.1.1_linux_amd64.tar.gz
+
+
+# Sequence
+1. train.py
+2. Some key args in config hw2itri_em_dla.yaml
+3. util/code/draw_anno_detection/draw_anno_detection.ipynb
+4. util/code/gen_anno/gen_coco_format_angle.ipynb
+
+
+//////////// Debug 2023/11/9 /////////////////
+# install tensorrt
+sudo apt-get install tensorrt
+sudo apt --fix-broken install
+sudo cp /var/nv-tensorrt-local-repo-ubuntu2004-8.5.1-cuda-11.8/*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+### NOT WORK ###
+
+# install cuDNN
+pip install cuda-python
+gcc --version
+sudo apt-get install cuda-toolkit
+sudo apt-get install zlib1g
+sudo dpkg -i cudnn-local-repo-ubuntu2004-8.9.6.50_1.0-1_amd64.deb
+sudo cp /var/cudnn-local-repo-ubuntu2004-8.9.6.50/cudnn-local-5FA1A941-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get install libcudnn8=8.9.6.50-1+cuda11.8
+sudo apt-get install libcudnn8-dev=8.9.6.50-1+cuda11.8
+sudo apt-get install libcudnn8-samples=8.9.6.50-1+cuda11.8
+
+cp -r /usr/src/cudnn_samples_v8/ $HOME
+cd  $HOME/cudnn_samples_v8/mnistCUDNN
+make clean && make
+### NOT WORK ###
+
+sudo apt-get install libfreeimage3 libfreeimage-dev
+make clean && make
+### WORK ###
+
+### After recompile, run ###
+./mnistCUDNN
+### Test passed! ###
+
+### Some Info ###
+Executing: mnistCUDNN
+cudnnGetVersion() : 8906 , CUDNN_VERSION from cudnn.h : 8906 (8.9.6)
+Host compiler version : GCC 9.4.0
+
+There are 1 CUDA capable devices on your machine :
+device 0 : sms 28  Capabilities 8.6, SmClock 1807.0 Mhz, MemSize (Mb) 12041, MemClock 7501.0 Mhz, Ecc=0, boardGroupID=0
+Using device 0
+### Some Info ###
+cuDNN version: cudnn-local-repo-ubuntu2004-8.9.6.50_1.0-1_amd64.deb
+
+### install TensorRT ###
+tar -xzvf TensorRT-8.5.1.7.Linux.x86_64-gnu.cuda-11.8.cudnn8.6.tar.gz
+ls TensorRT-8.5.1.7
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:TensorRT-8.5.1.7/lib
+cd TensorRT-8.5.1.7/python/
+
+### 先降版 ###
+conda install python==3.9.0
+python3 -m pip install tensorrt-*-cp39-none-linux_x86_64.whl
+### Finally !!! Successfully installed tensorrt-8.5.1.7 ###
+### keep install ###
+python3 -m pip install uff-0.6.9-py2.py3-none-any.whl
+python3 -m pip install graphsurgeon-0.4.6-py2.py3-none-any.whl
+python3 -m pip install onnx_graphsurgeon-0.3.12-py2.py3-none-any.whl
+
+### optional ###
+python3 -m pip install --upgrade tensorrt_lean
+python3 -m pip install --upgrade tensorrt_dispatch
+
+### Why I need to reinstall ###
+pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118
+
+### 2023 11/20 放棄上面的 ###
+conda create -n xuann python=3.7
+conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.1 -c pytorch
+pip3 install torchsummary
+pip3 install imgaug
+pip3 install omegaconf
+pip3 install matplotlib==3.4.3
+pip3 install Hydra==2.5
+pip3 install hydra_core==0.11.3
+
+pip3 install numpy
+pip3 install dotsi
+pip3 install tensorboard
+pip3 install pycocotools
+pip3 install tqdm
+#### No need : pip install hydra-core --upgrade --pre ####
+
+
+### Some nonessential error###
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+av2 0.2.1 requires click, which is not installed.
+ipykernel 6.19.2 requires psutil, which is not installed.
+nbconvert 7.2.7 requires defusedxml, which is not installed.
+pytest 7.2.0 requires attrs>=19.2.0, which is not installed.
+tensorflow 2.11.0 requires wrapt>=1.11.0, which is not installed.
+
+### ### ###
+### Debug: ModuleNotFoundError: No module named '_ext' 必須要做 ###
+cd libs/DCNv2/
+./make.sh
+###
+
