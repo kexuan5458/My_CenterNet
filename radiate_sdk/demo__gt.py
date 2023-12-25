@@ -4,8 +4,9 @@ import os
 
 # path to the sequence
 root_path = '/data/data/RADIATE/'
-# sequence_name = 'rain_4_0'
-sequence_name = 'city_7_0'
+sequence_name = 'rain_4_0'
+# sequence_name = 'city_7_0'
+# sequence_name = 'junction_1_12'
 
 # time (s) to retrieve next frame
 dt = 0.25

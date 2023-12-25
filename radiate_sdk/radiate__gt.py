@@ -717,10 +717,16 @@ class Sequence:
                             [bbox[0] + bbox[2], bbox[1] + bbox[3]],
                             [bbox[0], bbox[1] + bbox[3]]]).T
                     points_lst = []
+                    # points_lst.append([float(points[0][0]), float(points[1][0])])
+                    # points_lst.append([float(points[0][1]), float(points[1][1])])
+                    # points_lst.append([float(points[0][2]), float(points[1][2])])
+                    # points_lst.append([float(points[0][3]), float(points[1][3])])
                     points_lst.append([float(points[0][0]), float(points[1][0])])
-                    points_lst.append([float(points[0][1]), float(points[1][1])])
-                    points_lst.append([float(points[0][2]), float(points[1][2])])
                     points_lst.append([float(points[0][3]), float(points[1][3])])
+                    points_lst.append([float(points[0][2]), float(points[1][2])])
+                    points_lst.append([float(points[0][1]), float(points[1][1])])
+                    
+                    
                 objs.append(
                     { 
                         "sample_token": frame_token,
