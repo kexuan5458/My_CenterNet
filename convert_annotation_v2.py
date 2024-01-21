@@ -5,6 +5,7 @@ class_name is a string with the class name.
 bboxes contains position: (x, y, width, height) where (x, y) is the upper-left pixel locations of the bounding box of the given width and height. 
 And rotation is the angle in degrees using counter-clockwise.
 # 改為以原radiate照片檔名製作成coco.json
+folder為/data/data/RADIATE
 '''
 
 import json
@@ -108,7 +109,7 @@ for data_idx in range(len(data)):
             crowd0_1 = 1 if (objClsName == "group_of_pedestrians") else 0
             ann.append(
             { 
-                "id": data_idx, # object id
+                "id": objID, # object id (data_idx?)
                 "image_id": idx,
                 "category_id": catDic[objClsName],
                 "bbox": position, 
