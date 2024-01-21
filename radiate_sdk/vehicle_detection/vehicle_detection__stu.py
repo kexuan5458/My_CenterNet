@@ -39,7 +39,6 @@ with open(file_path, 'r') as file:
             fourth_column_list.append(columns[3])
 
 network = 'faster_rcnn_R_50_FPN_3x'
-# network = 'faster_rcnn_R_101_FPN_3x'
 setting = 'good_and_bad_weather_radar'
 
 # time (s) to retrieve next frame
@@ -53,8 +52,8 @@ cfg = get_cfg()
 cfg.merge_from_file(os.path.join('test','config' , network + '.yaml'))
 cfg.MODEL.DEVICE = 'cuda'
 # cfg.MODEL.WEIGHTS = os.path.join('weights',  network +'_' + setting + '.pth') 
-
-cfg.MODEL.WEIGHTS = '/home/ee904/Repo/My_CenterNet/radiate_sdk/vehicle_detection/weights/faster_rcnn_R_50_FPN_3x_good_weather_ITRIown.pth'
+# cfg.MODEL.WEIGHTS = '/home/ee904/Repo/My_CenterNet/radiate_sdk/vehicle_detection/weights/faster_rcnn_R_50_FPN_3x_good_and_bad_weather_radar.pth'
+cfg.MODEL.WEIGHTS = '/home/ee904/Repo/My_CenterNet/radiate_sdk/vehicle_detection/weights/faster_rcnn_R_50_FPN_3x_good_weather_radar_own.pth'
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1  # only has one class (vehicle)
 cfg.MODEL.ROI_HEADS.NMS_THRESH_TEST = 0.2
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5
@@ -70,9 +69,8 @@ for t in (fourth_column_list):
     
     output = seq.get_from_timestamp(t)
     if output != {}:
-
         radar = output['sensors']['radar_cartesian']
-        # camera = output['sensors']['camera_right_rect']
+        camera = output['sensors']['camera_right_rect']
         predictions = predictor(radar)
         
 
@@ -97,14 +95,12 @@ for t in (fourth_column_list):
         radar = seq.vis(radar, objects, numpy_scores, frame_count, color=(255,0,0), mode='rot')
 
 
-        # bboxes_cam = seq.project_bboxes_to_camera(objects,
-                                                # seq.calib.right_cam_mat,
-                                                # seq.calib.RadarToRight)
-        # camera = seq.vis_3d_bbox_cam(camera, bboxes_cam)
+        bboxes_cam = seq.project_bboxes_to_camera(objects,
+                                                seq.calib.right_cam_mat,
+                                                seq.calib.RadarToRight)
+        camera = seq.vis_3d_bbox_cam(camera, bboxes_cam)
         # camera = seq.vis_bbox_cam(camera, bboxes_cam)
 
         cv2.imshow('radar', radar)
-        # cv2.imshow('camera_right_rect', camera)
+        cv2.imshow('camera_right_rect', camera)
         cv2.waitKey(10)
-    else:
-        print("output is empty")
