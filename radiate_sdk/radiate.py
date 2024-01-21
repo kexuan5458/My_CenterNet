@@ -21,7 +21,7 @@ class Sequence:
     | >>> seq.vis_all(output)
     """
 
-    def __init__(self, sequence_path, config_file='/home/ee904/Repo/My_CenterNet/radiate_sdk/config/config.yaml'):
+    def __init__(self, sequence_path, config_file='config/config.yaml'):
         """
         Initialise the class Sequence. This class contains the methods related to
         access the sensor and annotation information at certain timestamp
@@ -226,6 +226,7 @@ class Sequence:
                 self.sequence_path, 'velo_lidar', str_format.format(id_lidar) + '.csv')
 
             sensors = {}
+            sensors['id'] = id_radar
             if (self.config['use_camera_left_raw'] or
                 self.config['use_camera_right_raw'] or
                 self.config['use_camera_left_rect'] or
@@ -439,7 +440,7 @@ class Sequence:
             for ii in range(len(bbox_3d)):
                 color = self.colors[obj['class_name']]
                 vis_im = cv2.line(vis_im, (bbox_3d[ii - 1][0], bbox_3d[ii - 1][1]),
-                                  (bbox_3d[ii][0], bbox_3d[ii][1]), (np.array(color) * 255).astype(np.int).tolist(), 1)
+                                  (bbox_3d[ii][0], bbox_3d[ii][1]), (np.array(color) * 255).astype(np.int64).tolist(), 1)
 
         return vis_im
 
@@ -468,7 +469,7 @@ class Sequence:
                 # hei = bb[3] - bb[1]
                 bb[0] += wid*(1.0 - pc_size)
                 bb[2] -= wid*(1.0 - pc_size)
-                bb = bb.astype(np.int)
+                bb = bb.astype(np.int64)
                 vis_im = cv2.rectangle(
                     vis_im, (bb[0], bb[1]), (bb[2], bb[3]), (np.array(color) * 255))
 
@@ -722,7 +723,7 @@ class Sequence:
         :return: the closest id
         :rtype: int
         """
-        ind = np.argmin(np.abs(all_timestamps['time'] - t + time_offset))
+        ind = np.argmin(np.abs(np.array(all_timestamps['time']) - t + time_offset))
         return all_timestamps['frame'][ind], all_timestamps['time'][ind]
 
     def __timestamp_format(self, raw_timestamp):
@@ -818,8 +819,8 @@ class Sequence:
         cx = cameraMatrix[0, 2]
         cy = cameraMatrix[1, 2]
 
-        xIm = np.round((fx * points[:, 0] / points[:, 2]) + cx).astype(np.int)
-        yIm = np.round((fy * points[:, 1] / points[:, 2]) + cy).astype(np.int)
+        xIm = np.round((fx * points[:, 0] / points[:, 2]) + cx).astype(np.int64)
+        yIm = np.round((fy * points[:, 1] / points[:, 2]) + cy).astype(np.int64)
 
         proj_bbox_3d = []
         for ii in range(1, xIm.shape[0]):

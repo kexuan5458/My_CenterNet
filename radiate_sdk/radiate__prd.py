@@ -206,10 +206,13 @@ class Sequence:
             t, self.timestamp_lidar, self.config['sync']['lidar'])
         id_radar, ts_radar = self.get_id(
             t, self.timestamp_radar, self.config['sync']['radar'])
-        if (len(self.timestamp_radar['time']) > id_radar + 1):
-            t2 = self.timestamp_radar['time'][id_radar + 1]
-        else:
-            return output
+        print("id_radar = ", id_radar)
+        print(len(self.timestamp_radar['time']))
+
+        # if (len(self.timestamp_radar['time']) > id_radar + 1):
+        #     t2 = self.timestamp_radar['time'][id_radar + 1]
+        # else:
+        #     return output
 
         if get_sensors:
             str_format = '{:06d}'
