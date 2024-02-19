@@ -7,10 +7,10 @@
 ###　copy the images to the train and test folder  ###
 # train_good_weather
 
-# for folder in 'junction_1_13' 'motorway_1_0' 'junction_1_2' 'junction_1_0' 'city_2_0' 'city_4_0' 'junction_1_7' 'junction_1_6' 'junction_2_3' 'city_1_1' 'junction_2_1' 'city_3_2' 'junction_3_0' 'motorway_2_1' 'city_3_1' 'junction_3_1' 'city_3_0' 'city_1_0' 'rural_1_1' 'city_3_3' 'junction_2_2' 'city_5_0' 'motorway_2_0' 'junction_1_3' 'rural_1_3' 'junction_1_4' 'junction_1_1' 'junction_1_14' 'junction_1_5' 'junction_1_15' 'junction_2_0'
-# do
-#   cp /data/RADIATE/${folder}/Navtech_Cartesian/*.png /data/RADIATE/train_good_weather/
-# done
+for folder in 'junction_1_13' 'motorway_1_0' 'junction_1_2' 'junction_1_0' 'city_2_0' 'city_4_0' 'junction_1_7' 'junction_1_6' 'junction_2_3' 'city_1_1' 'junction_2_1' 'city_3_2' 'junction_3_0' 'motorway_2_1' 'city_3_1' 'junction_3_1' 'city_3_0' 'city_1_0' 'rural_1_1' 'city_3_3' 'junction_2_2' 'city_5_0' 'motorway_2_0' 'junction_1_3' 'rural_1_3' 'junction_1_4' 'junction_1_1' 'junction_1_14' 'junction_1_5' 'junction_1_15' 'junction_2_0'
+do
+  cp /data/RADIATE/${folder}/Navtech_Cartesian/*.png /data/RADIATE/train_good_weather/
+done
 
 # train_good_and_bad_weather
 # mini_train

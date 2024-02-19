@@ -1,13 +1,21 @@
 '''
+Author: KeXuan Wang
+### First Step ###
+To write a new json file, which image names are all modified to timestamp.
+
+Get the image name and timestamp from the txt file.
+Change image's name to corresponding 'timestamp'.png
+
+### Second Step ###
 The annotation is saved as a .json file, where each entry of a list contains id, class_name, bboxes. 
-id is the object identification. 
-class_name is a string with the class name. 
-bboxes contains position: (x, y, width, height) where (x, y) is the upper-left pixel locations of the bounding box of the given width and height. 
-And rotation is the angle in degrees using counter-clockwise.
-2024/1/21更新
+1. id is the object identification. 
+2. class_name is a string with the class name. 
+3. bboxes contains position: (x, y, width, height) where (x, y) is the upper-left pixel locations of the bounding box of the given width and height. 
+4. And rotation is the angle in degrees using counter-clockwise.
+
+### 2024/1/21更新 ###
 From RADIATE annotation format to COCO annotation format.
-Each category has its own id.
-image name為timestamp
+Each category has its own id. (image name為timestamp)
 '''
 
 import json
@@ -61,6 +69,11 @@ for i in range(len(array)):
     array_processed.append([(array[i][1]), timestamp])
 array2D = np.asarray(array_processed)  # <class 'numpy.ndarray'>
 arr_timestamp = array2D[:,1] # column 1 -> timestamp (str)
+arr_name = array2D[:,0]     # column 0 -> image name(number) (str)
+# dictionary = np.stack((arr_timestamp, arr_name), axis=1)    # both column are str
+# arr_name = arr_name.astype('int')
+
+# Using index of arr_timestamp as image ID
 for img_idx in range(len(arr_timestamp)):
   img_name = arr_timestamp[img_idx] + '.png'
   images.append(

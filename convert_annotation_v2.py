@@ -1,10 +1,20 @@
 '''
+Author: KeXuan Wang
+### First Step ###
+To write a new json file, which image names are all modified to timestamp.
+
+Get the image name and timestamp from the txt file.
+Change image's name to corresponding 'timestamp'.png
+
+### Second Step ###
 The annotation is saved as a .json file, where each entry of a list contains id, class_name, bboxes. 
-id is the object identification. 
-class_name is a string with the class name. 
-bboxes contains position: (x, y, width, height) where (x, y) is the upper-left pixel locations of the bounding box of the given width and height. 
-And rotation is the angle in degrees using counter-clockwise.
-# 改為以原radiate照片檔名製作成coco.json
+1. id is the object identification. 
+2. class_name is a string with the class name. 
+3. bboxes contains position: (x, y, width, height) where (x, y) is the upper-left pixel locations of the bounding box of the given width and height. 
+4. And rotation is the angle in degrees using counter-clockwise.
+
+### 2024/1/21更新 ###
+改為以原radiate照片檔名製作成coco.json
 folder為/data/data/RADIATE
 '''
 
